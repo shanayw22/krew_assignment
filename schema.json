@@ -1,0 +1,74 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "AI Document Object Schema",
+  "description": "Schema for documents in the AI collections workflow",
+  "type": "object",
+  "required": [
+    "url",
+    "title",
+    "body_text",
+    "char_count",
+    "word_count",
+    "language",
+    "content_type",
+    "fetched_at"
+  ],
+  "properties": {
+    "url": {
+      "type": "string",
+      "format": "uri",
+      "description": "Canonical URL of the document"
+    },
+    "title": {
+      "type": "string",
+      "description": "Page title extracted from HTML"
+    },
+    "body_text": {
+      "type": "string",
+      "description": "Cleaned main body text content (HTML tags removed, normalized whitespace)"
+    },
+    "char_count": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Character count of body_text"
+    },
+    "word_count": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Word count of body_text"
+    },
+    "language": {
+      "type": "string",
+      "pattern": "^[a-z]{2}$",
+      "description": "Detected language code (ISO 639-1, e.g., 'en', 'es', 'fr')"
+    },
+    "content_type": {
+      "type": "string",
+      "enum": ["article", "doc_page", "product_page", "tutorial", "about", "page"],
+      "description": "Type of content (article, documentation, product page, etc.)"
+    },
+    "fetched_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 timestamp when the document was fetched (UTC)"
+    },
+    "reading_time_minutes": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "Estimated reading time in minutes (based on 200 words/minute)"
+    },
+    "is_mostly_code": {
+      "type": "boolean",
+      "description": "True if content appears to be mostly code"
+    },
+    "domain": {
+      "type": "string",
+      "description": "Domain name extracted from URL"
+    },
+    "path": {
+      "type": "string",
+      "description": "URL path component"
+    }
+  }
+}
+
